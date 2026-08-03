@@ -7,29 +7,21 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Aldrich&family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          'sp-blue': '#0F77BD',
-          'sp-blue-deep': '#015AB9',
-          'sp-blue-dark': '#0A5A90',
-          'sp-yellow': '#DDF708',
-          'sp-yellow-cta': '#E7F802',
-          'sp-ink': '#0C0C09',
-          'sp-muted': '#8B8B89',
-          'sp-divider': '#E0E0DE',
-        },
-        fontFamily: {
-          display: ['Aldrich', 'sans-serif'],
-          sans: ['Inter', 'sans-serif'],
-        },
-      },
-    },
-  };
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style type="text/tailwindcss">
+  @theme {
+    --color-sp-blue: #0F77BD;
+    --color-sp-blue-deep: #015AB9;
+    --color-sp-blue-dark: #0A5A90;
+    --color-sp-yellow: #DDF708;
+    --color-sp-yellow-cta: #E7F802;
+    --color-sp-ink: #0C0C09;
+    --color-sp-muted: #8B8B89;
+    --color-sp-divider: #E0E0DE;
+    --font-display: 'Aldrich', sans-serif;
+    --font-sans: 'Inter', sans-serif;
+  }
+</style>
 <style>
   body { font-family: 'Inter', sans-serif; }
   .font-display { font-family: 'Aldrich', sans-serif; }
