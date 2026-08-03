@@ -47,42 +47,39 @@
     <!-- source frame), everything inside positioned absolutely against  -->
     <!-- that one known height, so nothing can drift or overlap.         -->
     <!-- ================================================================ -->
-    <div class="relative h-[680px] overflow-hidden lg:hidden">
+    <div class="relative min-h-screen overflow-hidden lg:hidden">
 
-      <!-- background photo, full cover, full opacity — behind everything -->
-      <div class="absolute inset-0 -z-10">
-        <img src="./Assets/herobg.png" alt="Tennis racket" class="h-full w-full object-cover object-left-top" />
+      <!-- background photo, full cover, muted opacity — behind everything -->
+      <div class="absolute inset-0 z-0">
+        <img src="./Assets/herobg.png" alt="Tennis racket" class="h-full w-full object-cover object-[35%_top] opacity-50" />
       </div>
 
       <!-- headline -->
-      <div class="absolute left-5 top-6 z-10 flex flex-col pr-5">
-        <p class="text-[10px] font-medium uppercase tracking-[0.16em] text-sp-ink">
+      <div class="absolute left-25 top-20 z-10 flex flex-col pr-5">
+        <p class="text-[10px] text-right font-medium uppercase tracking-[0.16em] text-sp-ink">
           Community Courts. Easy Booking.
         </p>
-        <h1 class="font-display mt-2 text-[26px] uppercase leading-[1.05] text-white">
+        <h1 class="font-display mt-2 text-[36px] text-right uppercase leading-[1.05] text-white">
           Find Your Court.
         </h1>
-        <h2 class="font-display text-[26px] uppercase leading-[1.05] text-sp-yellow">
+        <h2 class="font-display text-[36px] text-right uppercase leading-[1.2] text-sp-yellow">
           Play Your Game.
         </h2>
       </div>
 
       <!-- CTA -->
-      <div class="absolute left-5 top-[300px] z-10 flex flex-col items-start gap-3">
-        <a href="booking.html" class="inline-flex items-center gap-3 rounded-full bg-sp-yellow-cta px-7 py-3.5 text-base font-bold text-sp-ink shadow-[inset_0_4px_4px_rgba(0,0,0,0.25),0_4px_8px_rgba(0,0,0,0.25)] hover:brightness-95 transition">
+      <div class="absolute left-55 top-[650px] z-10 flex flex-col items-start gap-3">
+        <a href="booking.html" class="inline-flex items-center gap-10 rounded-full bg-sp-yellow-cta px-10 py-5 text-xl font-bold text-sp-ink shadow-[inset_0_4px_4px_rgba(0,0,0,0.25),0_4px_8px_rgba(0,0,0,0.25)] hover:brightness-95 transition">
           Book Your Court
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
             <path d="M9 5l6 7-6 7" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
-        <p class="text-sm font-medium text-white">3 courts available today →</p>
+        <p class="text-lg font-medium text-white">3 courts available today →</p>
       </div>
 
       <!-- watermark, sits well below the CTA, low in the hero -->
       <img src="./Assets/SETPOINT.svg" alt="" class="pointer-events-none absolute left-0 top-[400px] z-0 w-[105%] max-w-none opacity-90" />
-
-      <!-- decorative line, just under the watermark -->
-      <img src="./Assets/hero-lower-line.png" alt="" class="pointer-events-none absolute left-5 top-[540px] z-0 w-[95px]" />
 
       <!-- social icons, bottom-left corner of the hero -->
       <div class="absolute bottom-4 left-4 z-20 flex items-center gap-3">
