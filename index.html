@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Setpoint — Find Your Court. Play Your Game.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aldrich&family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style type="text/tailwindcss">
+  @theme {
+    --color-sp-blue: #0F77BD;
+    --color-sp-blue-deep: #015AB9;
+    --color-sp-blue-dark: #0A5A90;
+    --color-sp-yellow: #DDF708;
+    --color-sp-yellow-cta: #E7F802;
+    --color-sp-ink: #0C0C09;
+    --color-sp-muted: #8B8B89;
+    --color-sp-divider: #E0E0DE;
+    --font-display: 'Aldrich', sans-serif;
+    --font-sans: 'Inter', sans-serif;
+  }
+</style>
+<style>
+  body { font-family: 'Inter', sans-serif; }
+  .font-display { font-family: 'Aldrich', sans-serif; }
+</style>
+</head>
+<body class="bg-white text-sp-ink antialiased">
+
+  <!-- ===== HERO + NAVBAR ===== -->
+  <header class="relative bg-sp-blue">
+
+    <!-- navbar (shared, inset padding on every breakpoint) -->
+    <div class="relative z-20 px-4 pt-4 sm:px-6 sm:pt-6 lg:px-10 lg:pt-8">
+      <nav class="mx-auto flex max-w-[1665px] items-center justify-between rounded-full bg-white px-5 py-3 shadow-[0_4px_4px_rgba(0,0,0,0.25)] sm:px-8 sm:py-4">
+        <img src="./Assets/SETPOINT-logoBlack.svg" alt="Setpoint" class="h-8 translate-y-1.5 sm:h-10 sm:translate-y-2" />
+        <a href="booking.html" class="rounded-2xl bg-sp-yellow px-4 py-2.5 text-xs font-extrabold uppercase tracking-wide text-sp-ink shadow-[0_4px_2px_rgba(0,0,0,0.25)] sm:px-6 sm:py-3 sm:text-sm hover:brightness-95 transition">
+          Book court
+        </a>
+      </nav>
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- MOBILE HERO — below lg. Fixed-height box (matches the 680px      -->
+    <!-- source frame), everything inside positioned absolutely against  -->
+    <!-- that one known height, so nothing can drift or overlap.         -->
+    <!-- ================================================================ -->
+    <div class="relative min-h-screen overflow-hidden lg:hidden">
+
+      <!-- background photo, full cover, muted opacity — behind everything -->
+      <div class="absolute inset-0 z-0">
+        <img src="./Assets/herobg.png" alt="Tennis racket" class="h-full w-full object-cover object-[35%_top] opacity-50" />
+      </div>
+
+      <!-- headline -->
+      <div class="absolute left-25 top-20 z-10 flex flex-col pr-5">
+        <p class="text-[10px] text-right font-medium uppercase tracking-[0.16em] text-sp-ink">
+          Community Courts. Easy Booking.
+        </p>
+        <h1 class="font-display mt-2 text-[36px] text-right uppercase leading-[1.05] text-white">
+          Find Your Court.
+        </h1>
+        <h2 class="font-display text-[36px] text-right uppercase leading-[1.2] text-sp-yellow">
+          Play Your Game.
+        </h2>
+      </div>
+
+      <!-- CTA -->
+      <div class="absolute left-35 top-[650px] z-10 flex flex-col items-start gap-2">
+        <a href="booking.html" class="inline-flex items-center gap-10 rounded-full bg-sp-yellow-cta px-8 py-3 text-xl font-bold text-sp-ink shadow-[inset_0_4px_4px_rgba(0,0,0,0.25),0_4px_8px_rgba(0,0,0,0.25)] hover:brightness-95 transition">
+          Book Your Court
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+            <path d="M9 5l6 7-6 7" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <p class="text-lg font-medium text-white">3 courts available today →</p>
+      </div>
+
+      <!-- watermark, sits well below the CTA, low in the hero -->
+      <img src="./Assets/SETPOINT.svg" alt="" class="pointer-events-none absolute left-0 top-[400px] z-0 w-[105%] max-w-none opacity-90" />
+
+      <!-- social icons, bottom-left corner of the hero -->
+      <div class="absolute bottom-4 left-4 z-20 flex items-center gap-3">
+        <span class="flex h-12 w-12 items-center justify-center rounded-[10px] bg-sp-ink">
+          <svg width="26" height="26" viewBox="2 2 20 20" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#fff" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="#fff" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1" fill="#fff"/></svg>
+        </span>
+        <span class="flex h-12 w-12 items-center justify-center rounded-[10px] bg-sp-ink">
+          <svg width="26" height="26" viewBox="2 2 20 20" fill="none"><path d="M17 2h-3a5 5 0 00-5 5v3H6v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" fill="#fff"/></svg>
+        </span>
+      </div>
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- DESKTOP HERO — lg and up, unchanged original layout   -->
+    <!-- ===================================================== -->
+    <div class="hidden lg:isolate lg:relative lg:flex lg:min-h-screen lg:flex-col lg:overflow-hidden lg:block">
+
+      <!-- background photo -->
+      <div class="absolute inset-0 -z-10">
+        <img src="./Assets/herobg.png" alt="Tennis racket" class="h-full w-full object-cover object-left-top" />
+      </div>
+
+      <!-- big faded wordmark watermark, sits behind headline + CTA -->
+      <img src="./Assets/SETPOINT.svg" alt="" class="pointer-events-none absolute right-0 top-[50%] z-0 w-[82%] max-w-[1060px] opacity-90" />
+
+      <!-- hero copy -->
+      <div class="absolute z-10 flex flex-col right-[255px] top-[150px]">
+        <p class="text-right text-base font-medium uppercase tracking-[0.2em] text-sp-ink">
+          Community Courts. Easy Booking.
+        </p>
+        <h1 class="font-display mt-2 text-right text-[64px] uppercase leading-none text-white">
+          Find Your Court.
+        </h1>
+        <h2 class="font-display text-right text-[64px] uppercase leading-none text-sp-yellow">
+          Play Your Game.
+        </h2>
+      </div>
+
+      <div class="absolute z-10 flex flex-col items-end gap-4 right-[375px] top-[640px]">
+        <a href="booking.html" class="inline-flex items-center gap-3 rounded-full bg-sp-yellow-cta px-10 py-5 text-lg font-bold text-sp-ink shadow-[inset_0_4px_4px_rgba(0,0,0,0.25),0_4px_8px_rgba(0,0,0,0.25)] hover:brightness-95 transition">
+          Book Your Court
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M6 5l6 7-6 7" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M13 5l6 7-6 7" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <p class="text-sm font-medium text-white">3 courts available today →</p>
+      </div>
+
+      <!-- bottom-left social badges -->
+      <div class="absolute z-20 flex items-center gap-3 bottom-4 left-4">
+        <span class="flex h-14 w-14 items-center justify-center rounded-[10px] bg-sp-ink">
+          <svg width="36" height="36" viewBox="2 2 20 20" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#fff" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="#fff" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1" fill="#fff"/></svg>
+        </span>
+        <span class="flex h-14 w-14 items-center justify-center rounded-[10px] bg-sp-ink">
+          <svg width="36" height="36" viewBox="2 2 20 20" fill="none"><path d="M17 2h-3a5 5 0 00-5 5v3H6v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" fill="#fff"/></svg>
+        </span>
+      </div>
+
+      <!-- bottom decorative line -->
+      <div class="absolute z-0 bottom-0 left-0">
+        <img src="./Assets/hero-lower-line.png" alt="" class="pointer-events-none w-[80%] max-w-[3060px]" />
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== AVAILABLE COURTS ===== -->
+  <section class="bg-sp-blue px-4 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
+    <div class="mx-auto max-w-[1665px]">
+      <div class="flex flex-col items-center gap-6 text-center lg:flex-row lg:items-end lg:justify-between lg:text-left">
+        <div>
+          <p class="text-xs font-medium uppercase tracking-[0.15em] text-sp-yellow sm:text-sm">Available Today</p>
+          <h2 class="font-display mt-2 text-4xl uppercase leading-tight text-white sm:text-5xl lg:text-[54px]">Book Your Court</h2>
+        </div>
+        <a href="#" class="hidden items-center gap-2 rounded-full border-2 border-white/30 px-6 py-3.5 text-sm font-medium text-white hover:bg-white/10 transition lg:inline-flex">
+          View all courts
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- court cards -->
+      <div class="mt-10 grid grid-cols-1 gap-6 lg:mt-16 lg:grid-cols-3 lg:gap-8">
+
+        <!-- Centre Court -->
+        <article class="overflow-hidden rounded-[20px] bg-white shadow-[0_4px_24px_rgba(0,0,0,0.12)]">
+          <div class="relative h-52">
+            <img src="./Assets/CentreCourt.png" alt="Centre Court" class="h-full w-full object-cover" />
+            <span class="absolute left-4 top-4 rounded-full bg-sp-yellow px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-sp-ink">Outdoor</span>
+          </div>
+          <div class="flex flex-col gap-4 p-6">
+            <div>
+              <h3 class="font-display text-2xl uppercase text-sp-ink">Centre Court</h3>
+              <p class="mt-1 flex items-center gap-1.5 text-sm text-black/60">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="shrink-0"><path d="M12 21s7-6.6 7-12a7 7 0 10-14 0c0 5.4 7 12 7 12z" stroke="#000" stroke-opacity=".5" stroke-width="1.6"/><circle cx="12" cy="9" r="2.4" stroke="#000" stroke-opacity=".5" stroke-width="1.6"/></svg>
+                Riverside Park
+              </p>
+            </div>
+            <div>
+              <p class="flex items-center gap-1.5 text-sm font-medium text-black/70">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#000" stroke-opacity=".6" stroke-width="1.6"/><path d="M12 7v5l3 2" stroke="#000" stroke-opacity=".6" stroke-width="1.6" stroke-linecap="round"/></svg>
+                4 slots available today
+              </p>
+              <div class="mt-2 flex flex-wrap gap-2">
+                <span class="rounded-full bg-[#f5f5f5] px-3 py-1.5 text-xs font-medium">9:00 AM</span>
+                <span class="rounded-full bg-[#f5f5f5] px-3 py-1.5 text-xs font-medium">11:00 AM</span>
+                <span class="rounded-full bg-[#f5f5f5] px-3 py-1.5 text-xs font-medium">2:00 PM</span>
+                <span class="rounded-full bg-[#f5f5f5] px-3 py-1.5 text-xs font-medium">5:00 PM</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between border-t border-black/[0.08] pt-4">
+              <p class="font-display text-2xl text-sp-ink">$18<span class="font-sans text-sm font-normal text-black/50">/hour</span></p>
+              <a href="booking.html" class="flex items-center gap-2 rounded-full bg-sp-blue px-5 py-2.5 text-sm font-bold text-white shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:brightness-110 transition">
+                Book Now
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Padel Arena -->
+        <article class="overflow-hidden rounded-[20px] bg-white shadow-[0_4px_24px_rgba(0,0,0,0.12)]">
+          <div class="relative h-52">
+            <img src="./Assets/PadelArena.png" alt="Padel Arena" class="h-full w-full object-cover" />
+            <span class="absolute left-4 top-4 rounded-full bg-sp-yellow px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-sp-ink">Indoor</span>
+          </div>
+          <div class="flex flex-col gap-4 p-6">
+            <div>
+              <h3 class="font-display text-2xl uppercase text-sp-ink">Padel Arena</h3>
+              <p class="mt-1 flex items-center gap-1.5 text-sm text-black/60">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="shrink-0"><path d="M12 21s7-6.6 7-12a7 7 0 10-14 0c0 5.4 7 12 7 12z" stroke="#000" stroke-opacity=".5" stroke-width="1.6"/><circle cx="12" cy="9" r="2.4" stroke="#000" stroke-opacity=".5" stroke-width="1.6"/></svg>
+                City Sports Hub
+              </p>
+            </div>
+            <div>
+              <p class="flex items-center gap-1.5 text-sm font-medium text-black/70">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#000" stroke-opacity=".6" stroke-width="1.6"/><path d="M12 7v5l3 2" stroke="#000" stroke-opacity=".6" stroke-width="1.6" stroke-linecap="round"/></svg>
+                3 slots available today
+              </p>
+              <div class="mt-2 flex flex-wrap gap-2">
+                <span class="rounded-full bg-[#f5f5f5] px-3 py-1.5 text-xs font-medium">10:00 AM</span>
+                <span class="rounded-full bg-[#f5f5f5] px-3 py-1.5 text-xs font-medium">1:00 PM</span>
+                <span class="rounded-full bg-[#f5f5f5] px-3 py-1.5 text-xs font-medium">4:00 PM</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between border-t border-black/[0.08] pt-4">
+              <p class="font-display text-2xl text-sp-ink">$24<span class="font-sans text-sm font-normal text-black/50">/hour</span></p>
+              <a href="booking.html" class="flex items-center gap-2 rounded-full bg-sp-blue px-5 py-2.5 text-sm font-bold text-white shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:brightness-110 transition">
+                Book Now
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Court 7 -->
+        <article class="overflow-hidden rounded-[20px] bg-white shadow-[0_4px_24px_rgba(0,0,0,0.12)]">
+          <div class="relative h-52">
+            <img src="./Assets/Court7.png" alt="Court 7" class="h-full w-full object-cover" />
+            <span class="absolute left-4 top-4 rounded-full bg-sp-yellow px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-sp-ink">Outdoor</span>
+          </div>
+          <div class="flex flex-col gap-4 p-6">
+            <div>
+              <h3 class="font-display text-2xl uppercase text-sp-ink">Court 7</h3>
+              <p class="mt-1 flex items-center gap-1.5 text-sm text-black/60">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="shrink-0"><path d="M12 21s7-6.6 7-12a7 7 0 10-14 0c0 5.4 7 12 7 12z" stroke="#000" stroke-opacity=".5" stroke-width="1.6"/><circle cx="12" cy="9" r="2.4" stroke="#000" stroke-opacity=".5" stroke-width="1.6"/></svg>
+                Westside Gardens
+              </p>
+            </div>
+            <div>
+              <p class="flex items-center gap-1.5 text-sm font-medium text-black/70">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#000" stroke-opacity=".6" stroke-width="1.6"/><path d="M12 7v5l3 2" stroke="#000" stroke-opacity=".6" stroke-width="1.6" stroke-linecap="round"/></svg>
+                4 slots available today
+              </p>
+              <div class="mt-2 flex flex-wrap gap-2">
+                <span class="rounded-full bg-[#f5f5f5] px-3 py-1.5 text-xs font-medium">8:00 AM</span>
+                <span class="rounded-full bg-[#f5f5f5] px-3 py-1.5 text-xs font-medium">12:00 PM</span>
+                <span class="rounded-full bg-[#f5f5f5] px-3 py-1.5 text-xs font-medium">3:00 PM</span>
+                <span class="rounded-full bg-[#f5f5f5] px-3 py-1.5 text-xs font-medium">6:00 PM</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between border-t border-black/[0.08] pt-4">
+              <p class="font-display text-2xl text-sp-ink">$15<span class="font-sans text-sm font-normal text-black/50">/hour</span></p>
+              <a href="booking.html" class="flex items-center gap-2 rounded-full bg-sp-blue px-5 py-2.5 text-sm font-bold text-white shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:brightness-110 transition">
+                Book Now
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <a href="#" class="mt-10 flex items-center justify-center gap-2 rounded-full border-2 border-white/30 px-6 py-3.5 text-sm font-medium text-white hover:bg-white/10 transition lg:hidden">
+        View all courts
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-sp-blue-dark px-4 py-14 sm:px-8 lg:px-10">
+    <div class="mx-auto max-w-[1400px]">
+      <div class="grid grid-cols-1 gap-10 border-b border-white/15 pb-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div>
+          <img src="https://www.figma.com/api/mcp/asset/d4d3c73b-ec77-4064-ac62-fa2d3195c1c7.svg" alt="Setpoint" class="h-8" />
+          <p class="mt-4 max-w-[280px] text-sm leading-relaxed text-white/60">Community courts, made easy. Find, book, and play in your neighbourhood.</p>
+          <div class="mt-5 flex gap-3">
+            <span class="flex h-10 w-10 items-center justify-center rounded-[10px] bg-sp-ink/70">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M17 2h-3a5 5 0 00-5 5v3H6v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" fill="#fff"/></svg>
+            </span>
+            <span class="flex h-10 w-10 items-center justify-center rounded-[10px] bg-sp-ink/70">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 5.9c-.7.3-1.5.6-2.3.7.8-.5 1.5-1.3 1.8-2.3-.8.5-1.7.8-2.6 1a4.1 4.1 0 00-7 3.7A11.6 11.6 0 013 4.9a4.1 4.1 0 001.3 5.5c-.6 0-1.3-.2-1.8-.5v.1c0 2 1.4 3.6 3.3 4a4.2 4.2 0 01-1.9.1c.5 1.6 2 2.8 3.8 2.9A8.3 8.3 0 012 18.6a11.6 11.6 0 006.3 1.8c7.5 0 11.7-6.3 11.7-11.7v-.5c.8-.6 1.5-1.3 2-2.1z" fill="#fff"/></svg>
+            </span>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-display text-sm uppercase tracking-wide text-white">Courts</h4>
+          <ul class="mt-4 space-y-3 text-sm text-white/60">
+            <li><a href="#" class="hover:text-white transition">Tennis Courts</a></li>
+            <li><a href="#" class="hover:text-white transition">Padel Courts</a></li>
+            <li><a href="#" class="hover:text-white transition">Squash Courts</a></li>
+            <li><a href="#" class="hover:text-white transition">Basketball</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-display text-sm uppercase tracking-wide text-white">Company</h4>
+          <ul class="mt-4 space-y-3 text-sm text-white/60">
+            <li><a href="#" class="hover:text-white transition">About Us</a></li>
+            <li><a href="#" class="hover:text-white transition">How It Works</a></li>
+            <li><a href="#" class="hover:text-white transition">Pricing</a></li>
+            <li><a href="#" class="hover:text-white transition">Blog</a></li>
+            <li><a href="#" class="hover:text-white transition">Careers</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-display text-sm uppercase tracking-wide text-white">Contact</h4>
+          <ul class="mt-4 space-y-3 text-sm text-white/60">
+            <li class="flex items-center gap-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 6l9 7 9-7" stroke="#fff" stroke-opacity=".6" stroke-width="1.6"/><rect x="3" y="5" width="18" height="14" rx="2" stroke="#fff" stroke-opacity=".6" stroke-width="1.6"/></svg>
+              <a href="mailto:hello@setpoint.io" class="hover:text-white transition">hello@setpoint.io</a>
+            </li>
+            <li class="flex items-center gap-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.7A2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 2 .7 3a2 2 0 01-.5 2.1L8 10a16 16 0 006 6l1.2-1.3a2 2 0 012.1-.5c1 .3 2 .5 3 .7a2 2 0 011.7 2z" stroke="#fff" stroke-opacity=".6" stroke-width="1.6"/></svg>
+              +1 800 SET POINT
+            </li>
+          </ul>
+          <a href="#" class="mt-6 inline-block rounded-2xl bg-sp-yellow px-6 py-2.5 text-sm font-bold uppercase tracking-wide text-sp-ink hover:brightness-95 transition">Get the App</a>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-col items-center gap-3 text-center sm:flex-row sm:justify-between sm:text-left">
+        <p class="text-xs text-white/40">© 2026 Setpoint. All rights reserved.</p>
+        <div class="flex gap-6 text-xs text-white/40">
+          <a href="#" class="hover:text-white transition">Cookie Policy</a>
+          <a href="#" class="hover:text-white transition">Terms of Service</a>
+          <a href="#" class="hover:text-white transition">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
