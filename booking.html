@@ -46,11 +46,19 @@
     <form id="booking-form" class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8">
 
       <!-- Location -->
-      <div>
+      <div class="relative" data-dropdown="location">
         <label class="mb-2 block text-sm font-medium uppercase tracking-wide text-sp-muted">Location</label>
-        <div class="flex h-[52px] items-center gap-3 rounded-2xl border border-sp-muted px-4">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.6 7-12a7 7 0 10-14 0c0 5.4 7 12 7 12z" stroke="#0C0C09" stroke-width="1.6"/><circle cx="12" cy="9" r="2.4" stroke="#0C0C09" stroke-width="1.6"/></svg>
-          <span class="text-base font-medium uppercase">Surrey, BC</span>
+        <button type="button" data-dropdown-trigger="location" class="flex h-[52px] w-full items-center gap-3 rounded-2xl border border-sp-muted px-4 text-left">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="shrink-0"><path d="M12 21s7-6.6 7-12a7 7 0 10-14 0c0 5.4 7 12 7 12z" stroke="#0C0C09" stroke-width="1.6"/><circle cx="12" cy="9" r="2.4" stroke="#0C0C09" stroke-width="1.6"/></svg>
+          <span id="location-label" class="text-base font-medium uppercase">Surrey, BC</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" class="ml-auto shrink-0"><path d="M6 9l6 6 6-6" stroke="#0C0C09" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div data-dropdown-panel="location" class="absolute inset-x-0 top-[60px] z-30 hidden overflow-hidden rounded-2xl border border-sp-divider bg-white shadow-lg">
+          <button type="button" class="dropdown-option block w-full px-4 py-3 text-left text-base uppercase hover:bg-black/5" data-value="Surrey, BC">Surrey, BC</button>
+          <button type="button" class="dropdown-option block w-full px-4 py-3 text-left text-base uppercase hover:bg-black/5" data-value="Vancouver, BC">Vancouver, BC</button>
+          <button type="button" class="dropdown-option block w-full px-4 py-3 text-left text-base uppercase hover:bg-black/5" data-value="Burnaby, BC">Burnaby, BC</button>
+          <button type="button" class="dropdown-option block w-full px-4 py-3 text-left text-base uppercase hover:bg-black/5" data-value="Richmond, BC">Richmond, BC</button>
+          <button type="button" class="dropdown-option block w-full px-4 py-3 text-left text-base uppercase hover:bg-black/5" data-value="Langley, BC">Langley, BC</button>
         </div>
       </div>
 
@@ -70,28 +78,57 @@
       </div>
 
       <!-- Players -->
-      <div>
+      <div class="relative" data-dropdown="players">
         <label class="mb-2 block text-sm font-medium uppercase tracking-wide text-sp-muted">Players</label>
-        <div class="flex h-[52px] items-center gap-3 rounded-2xl border border-sp-muted px-4">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3" stroke="#0C0C09" stroke-width="1.6"/><path d="M2 20a7 7 0 0114 0" stroke="#0C0C09" stroke-width="1.6"/><path d="M16 5.5a3 3 0 010 5.8M22 20a6.5 6.5 0 00-4.5-6.2" stroke="#0C0C09" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <button type="button" data-dropdown-trigger="players" class="flex h-[52px] w-full items-center gap-3 rounded-2xl border border-sp-muted px-4 text-left">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="shrink-0"><circle cx="9" cy="8" r="3" stroke="#0C0C09" stroke-width="1.6"/><path d="M2 20a7 7 0 0114 0" stroke="#0C0C09" stroke-width="1.6"/><path d="M16 5.5a3 3 0 010 5.8M22 20a6.5 6.5 0 00-4.5-6.2" stroke="#0C0C09" stroke-width="1.6" stroke-linecap="round"/></svg>
           <span id="players-label" class="text-base font-medium uppercase">2 Players</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" class="ml-auto shrink-0"><path d="M6 9l6 6 6-6" stroke="#0C0C09" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div data-dropdown-panel="players" class="absolute inset-x-0 top-[60px] z-30 hidden overflow-hidden rounded-2xl border border-sp-divider bg-white shadow-lg">
+          <button type="button" class="dropdown-option block w-full px-4 py-3 text-left text-base uppercase hover:bg-black/5" data-value="1 Player">1 Player</button>
+          <button type="button" class="dropdown-option block w-full px-4 py-3 text-left text-base uppercase hover:bg-black/5" data-value="2 Players">2 Players</button>
+          <button type="button" class="dropdown-option block w-full px-4 py-3 text-left text-base uppercase hover:bg-black/5" data-value="3 Players">3 Players</button>
+          <button type="button" class="dropdown-option block w-full px-4 py-3 text-left text-base uppercase hover:bg-black/5" data-value="4 Players">4 Players</button>
         </div>
       </div>
 
       <!-- Date + Time -->
       <div class="grid grid-cols-2 gap-3">
-        <div>
+        <div class="relative" data-dropdown="date">
           <label class="mb-2 block text-sm font-medium uppercase tracking-wide text-sp-muted">Date</label>
-          <div class="flex h-[52px] items-center gap-2 rounded-2xl border border-sp-muted px-3">
+          <button type="button" data-dropdown-trigger="date" class="flex h-[52px] w-full items-center gap-2 rounded-2xl border border-sp-muted px-3 text-left">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="shrink-0"><rect x="3" y="5" width="18" height="16" rx="2" stroke="#0C0C09" stroke-width="1.6"/><path d="M3 10h18M8 3v4M16 3v4" stroke="#0C0C09" stroke-width="1.6"/></svg>
             <span id="date-label" class="text-sm font-medium uppercase">Aug 12, 2026</span>
+          </button>
+          <div data-dropdown-panel="date" class="absolute left-0 top-[60px] z-30 hidden w-[280px] rounded-2xl border border-sp-divider bg-white p-4 shadow-lg">
+            <div class="flex items-center justify-between">
+              <button type="button" id="calendar-prev" class="flex h-8 w-8 items-center justify-center rounded-full hover:bg-black/5">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="#0C0C09" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <p id="calendar-month-label" class="text-sm font-semibold uppercase text-sp-ink"></p>
+              <button type="button" id="calendar-next" class="flex h-8 w-8 items-center justify-center rounded-full hover:bg-black/5">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#0C0C09" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="mt-3 grid grid-cols-7 gap-y-1 text-center text-[11px] font-medium uppercase text-sp-muted">
+              <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+            </div>
+            <div id="calendar-grid" class="mt-1 grid grid-cols-7 place-items-center gap-y-1"></div>
           </div>
         </div>
-        <div>
+        <div class="relative" data-dropdown="time">
           <label class="mb-2 block text-sm font-medium uppercase tracking-wide text-sp-muted">Time</label>
-          <div class="flex h-[52px] items-center gap-2 rounded-2xl border border-sp-muted px-3">
+          <button type="button" data-dropdown-trigger="time" class="flex h-[52px] w-full items-center gap-2 rounded-2xl border border-sp-muted px-3 text-left">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="shrink-0"><circle cx="12" cy="12" r="9" stroke="#0C0C09" stroke-width="1.6"/><path d="M12 7v5l3 2" stroke="#0C0C09" stroke-width="1.6" stroke-linecap="round"/></svg>
-            <span id="time-label" class="text-sm font-medium uppercase">11:30 AM</span>
+            <span id="time-label" class="text-sm font-medium uppercase">11:00 AM</span>
+          </button>
+          <div data-dropdown-panel="time" class="absolute inset-x-0 top-[60px] z-30 hidden overflow-hidden rounded-2xl border border-sp-divider bg-white shadow-lg">
+            <button type="button" class="dropdown-option block w-full px-4 py-3 text-left text-sm uppercase hover:bg-black/5" data-value="9:00 AM">9:00 AM</button>
+            <button type="button" class="dropdown-option block w-full px-4 py-3 text-left text-sm uppercase hover:bg-black/5" data-value="11:00 AM">11:00 AM</button>
+            <button type="button" class="dropdown-option block w-full px-4 py-3 text-left text-sm uppercase hover:bg-black/5" data-value="1:00 PM">1:00 PM</button>
+            <button type="button" class="dropdown-option block w-full px-4 py-3 text-left text-sm uppercase hover:bg-black/5" data-value="3:00 PM">3:00 PM</button>
+            <button type="button" class="dropdown-option block w-full px-4 py-3 text-left text-sm uppercase hover:bg-black/5" data-value="5:00 PM">5:00 PM</button>
           </div>
         </div>
       </div>
@@ -132,7 +169,7 @@
         <h3 class="font-display text-xl uppercase text-sp-ink">Central Park Court 1</h3>
         <p class="mt-1 flex items-center gap-1.5 text-sm text-sp-muted">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.6 7-12a7 7 0 10-14 0c0 5.4 7 12 7 12z" stroke="#8B8B89" stroke-width="1.6"/><circle cx="12" cy="9" r="2.4" stroke="#8B8B89" stroke-width="1.6"/></svg>
-          Central Park, Surrey
+          <span id="summary-location">Central Park, Surrey</span>
         </p>
 
         <dl class="mt-5 divide-y divide-black/10 text-sm">
@@ -185,7 +222,7 @@
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" class="shrink-0"><path d="M12 21s7-6.6 7-12a7 7 0 10-14 0c0 5.4 7 12 7 12z" stroke="#0C0C09" stroke-width="1.6"/><circle cx="12" cy="9" r="2.4" stroke="#0C0C09" stroke-width="1.6"/></svg>
           <div>
             <h3 class="font-display text-lg uppercase text-sp-ink sm:text-xl">Central Park Court 1</h3>
-            <p class="text-sm text-sp-muted">Central Park, Surrey</p>
+            <p id="confirmed-location" class="text-sm text-sp-muted">Central Park, Surrey</p>
           </div>
         </div>
         <div class="mt-5 flex flex-wrap gap-x-8 gap-y-4 text-sm uppercase text-sp-ink/90">
@@ -205,6 +242,85 @@
   </div>
 
   <script>
+    // dropdown fields (location / players / date / time)
+    function closeAllDropdowns() {
+      document.querySelectorAll('[data-dropdown-panel]').forEach(p => p.classList.add('hidden'));
+    }
+
+    document.querySelectorAll('[data-dropdown-trigger]').forEach(trigger => {
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const panel = document.querySelector(`[data-dropdown-panel="${trigger.dataset.dropdownTrigger}"]`);
+        const wasHidden = panel.classList.contains('hidden');
+        closeAllDropdowns();
+        if (wasHidden) panel.classList.remove('hidden');
+      });
+    });
+
+    document.querySelectorAll('[data-dropdown-panel]').forEach(panel => {
+      panel.addEventListener('click', (e) => e.stopPropagation());
+    });
+
+    document.addEventListener('click', () => closeAllDropdowns());
+
+    // simple list dropdowns: location, players, time
+    document.querySelectorAll('.dropdown-option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const key = btn.closest('[data-dropdown-panel]').dataset.dropdownPanel;
+        document.getElementById(`${key}-label`).textContent = btn.dataset.value;
+        closeAllDropdowns();
+      });
+    });
+
+    // date dropdown: custom calendar
+    let selectedDate = new Date(2026, 7, 12);
+    let viewDate = new Date(selectedDate);
+
+    function formatDate(date) {
+      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+
+    function renderCalendar() {
+      const year = viewDate.getFullYear();
+      const month = viewDate.getMonth();
+      document.getElementById('calendar-month-label').textContent = viewDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+      const grid = document.getElementById('calendar-grid');
+      grid.innerHTML = '';
+
+      const firstWeekday = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      for (let i = 0; i < firstWeekday; i++) {
+        grid.insertAdjacentHTML('beforeend', '<span></span>');
+      }
+
+      for (let d = 1; d <= daysInMonth; d++) {
+        const isSelected = selectedDate.getFullYear() === year && selectedDate.getMonth() === month && selectedDate.getDate() === d;
+        grid.insertAdjacentHTML('beforeend', `<button type="button" data-day="${d}" class="calendar-day flex h-9 w-9 items-center justify-center rounded-full text-sm uppercase transition ${isSelected ? 'bg-sp-blue-deep text-white font-semibold' : 'hover:bg-black/5'}">${d}</button>`);
+      }
+
+      grid.querySelectorAll('.calendar-day').forEach(btn => {
+        btn.addEventListener('click', () => {
+          selectedDate = new Date(year, month, parseInt(btn.dataset.day, 10));
+          document.getElementById('date-label').textContent = formatDate(selectedDate);
+          closeAllDropdowns();
+          renderCalendar();
+        });
+      });
+    }
+
+    document.getElementById('calendar-prev').addEventListener('click', () => {
+      viewDate.setMonth(viewDate.getMonth() - 1);
+      renderCalendar();
+    });
+    document.getElementById('calendar-next').addEventListener('click', () => {
+      viewDate.setMonth(viewDate.getMonth() + 1);
+      renderCalendar();
+    });
+
+    renderCalendar();
+
     // toggle button groups (court type / duration)
     document.querySelectorAll('.field-option').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -229,6 +345,7 @@
       const date = document.getElementById('date-label').textContent;
       const time = document.getElementById('time-label').textContent;
       const players = document.getElementById('players-label').textContent;
+      const location = document.getElementById('location-label').textContent;
 
       document.getElementById('summary-badge').textContent = courtType;
       document.getElementById('summary-courttype').textContent = courtType;
@@ -236,6 +353,7 @@
       document.getElementById('summary-date').textContent = date;
       document.getElementById('summary-time').textContent = time.toLowerCase();
       document.getElementById('summary-players').textContent = players;
+      document.getElementById('summary-location').textContent = location;
 
       modalSummary.classList.remove('hidden');
       modalSummary.classList.add('flex');
@@ -252,6 +370,7 @@
       document.getElementById('confirmed-date').textContent = document.getElementById('summary-date').textContent;
       document.getElementById('confirmed-time').textContent = document.getElementById('summary-time').textContent;
       document.getElementById('confirmed-players').textContent = document.getElementById('summary-players').textContent;
+      document.getElementById('confirmed-location').textContent = document.getElementById('summary-location').textContent;
 
       modalSummary.classList.add('hidden');
       modalSummary.classList.remove('flex');
