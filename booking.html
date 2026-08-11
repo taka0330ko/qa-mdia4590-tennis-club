@@ -38,10 +38,16 @@
 
   <!-- ===== BOOKING FORM ===== -->
   <main class="mx-auto max-w-[1200px] px-5 pb-24 pt-8 sm:px-8 lg:px-10">
-    <a href="index.html" class="text-xs font-medium uppercase tracking-wide text-sp-blue-deep sm:text-sm">Back to home / book a court</a>
+    <nav class="text-xs font-medium uppercase tracking-wide sm:text-sm" aria-label="Breadcrumb">
+      <a href="index.html" class="text-sp-blue-deep hover:underline">Back to home</a>
+      <span class="text-sp-muted"> / Book a court</span>
+    </nav>
 
     <h1 class="font-display mt-4 text-3xl uppercase text-sp-ink sm:text-4xl lg:text-5xl">Book your court</h1>
     <p class="mt-3 max-w-md text-base text-sp-muted sm:text-lg">Fill in the details below to reserve your court.</p>
+    <p id="selected-court-note" class="mt-3 hidden items-center gap-2 text-sm font-semibold text-sp-blue-deep sm:text-base">
+      Selected court: <span id="selected-court-name"></span> — <span id="selected-court-location"></span>
+    </p>
 
     <form id="booking-form" class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8">
 
@@ -157,7 +163,7 @@
   </main>
 
   <!-- ===== MODAL: Booking Summary ===== -->
-  <div id="modal-summary" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4">
+  <div id="modal-summary" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4" role="dialog" aria-modal="true" aria-label="Your booking summary">
     <div class="w-full max-w-[520px] rounded-2xl bg-white p-6 sm:p-8">
       <p class="font-display text-center text-lg uppercase text-sp-blue-deep">Your booking summary</p>
 
@@ -209,7 +215,7 @@
   </div>
 
   <!-- ===== MODAL: Booking Confirmed ===== -->
-  <div id="modal-confirmed" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4">
+  <div id="modal-confirmed" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4" role="dialog" aria-modal="true" aria-label="Booking confirmed">
     <div class="w-full max-w-[720px] rounded-[20px] border border-black/10 bg-white p-6 text-center sm:p-10">
       <div class="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-[#e6f6ea]">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#22c55e"/><path d="M7 12.5l3 3 7-7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -242,16 +248,26 @@
   </div>
 
   <script>
-    // court selection carried over from a homepage court card
+    // pre-fill selection carried over from a homepage court card
     const courtParams = new URLSearchParams(window.location.search);
     const selectedCourtName = courtParams.get('court');
     const selectedCourtLocation = courtParams.get('location');
     const selectedCourtType = courtParams.get('type');
-    const selectedCourtPrice = courtParams.get('price');
+const selectedCourtPrice = courtParams.get('price');
 
-    if (selectedCourtLocation) {
-      document.getElementById('location-label').textContent = selectedCourtLocation;
-    }
+if (selectedCourtName && selectedCourtLocation) {
+  document.getElementById('selected-court-name').textContent =
+    selectedCourtName;
+  document.getElementById('selected-court-location').textContent =
+    selectedCourtLocation;
+  document.getElementById('selected-court-note').classList.remove('hidden');
+  document.getElementById('selected-court-note').classList.add('flex');
+}
+
+if (selectedCourtLocation) {
+  document.getElementById('location-label').textContent =
+    selectedCourtLocation;
+}
 
     if (selectedCourtType === 'Indoor' || selectedCourtType === 'Outdoor') {
       document.querySelectorAll('.field-option[data-group="courtType"]').forEach(btn => {
@@ -305,6 +321,9 @@
       const grid = document.getElementById('calendar-grid');
       grid.innerHTML = '';
 
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
       const firstWeekday = new Date(year, month, 1).getDay();
       const daysInMonth = new Date(year, month + 1, 0).getDate();
 
@@ -314,10 +333,14 @@
 
       for (let d = 1; d <= daysInMonth; d++) {
         const isSelected = selectedDate.getFullYear() === year && selectedDate.getMonth() === month && selectedDate.getDate() === d;
-        grid.insertAdjacentHTML('beforeend', `<button type="button" data-day="${d}" class="calendar-day flex h-9 w-9 items-center justify-center rounded-full text-sm uppercase transition ${isSelected ? 'bg-sp-blue-deep text-white font-semibold' : 'hover:bg-black/5'}">${d}</button>`);
+        const isPast = new Date(year, month, d) < today;
+        const classes = isPast
+          ? 'text-sp-muted/40 cursor-not-allowed'
+          : (isSelected ? 'bg-sp-blue-deep text-white font-semibold' : 'hover:bg-black/5');
+        grid.insertAdjacentHTML('beforeend', `<button type="button" data-day="${d}" ${isPast ? 'disabled aria-disabled="true"' : ''} class="calendar-day flex h-9 w-9 items-center justify-center rounded-full text-sm uppercase transition ${classes}">${d}</button>`);
       }
 
-      grid.querySelectorAll('.calendar-day').forEach(btn => {
+      grid.querySelectorAll('.calendar-day:not([disabled])').forEach(btn => {
         btn.addEventListener('click', () => {
           selectedDate = new Date(year, month, parseInt(btn.dataset.day, 10));
           document.getElementById('date-label').textContent = formatDate(selectedDate);
@@ -355,6 +378,49 @@
       return active ? active.dataset.value : '';
     }
 
+    // accessible modal open/close: moves focus in, traps Tab inside, restores focus on close
+    let lastFocusedBeforeModal = null;
+
+    function getFocusable(container) {
+      return Array.from(container.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'))
+        .filter(el => !el.disabled && el.offsetParent !== null);
+    }
+
+    function openModal(modal) {
+      lastFocusedBeforeModal = document.activeElement;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      const focusable = getFocusable(modal);
+      (focusable[0] || modal).focus();
+    }
+
+    function closeModal(modal) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      if (lastFocusedBeforeModal) lastFocusedBeforeModal.focus();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      const openModalEl = [modalSummary, modalConfirmed].find(m => !m.classList.contains('hidden'));
+      if (!openModalEl) return;
+
+      if (e.key === 'Tab') {
+        const focusable = getFocusable(openModalEl);
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      } else if (e.key === 'Escape' && openModalEl === modalSummary) {
+        closeModal(modalSummary);
+      }
+    });
+
     document.getElementById('booking-form').addEventListener('submit', (e) => {
       e.preventDefault();
       const courtType = getValue('courtType');
@@ -374,13 +440,11 @@
       document.getElementById('summary-courtname').textContent = selectedCourtName || 'Central Park Court 1';
       document.getElementById('summary-price').textContent = selectedCourtPrice || '30';
 
-      modalSummary.classList.remove('hidden');
-      modalSummary.classList.add('flex');
+      openModal(modalSummary);
     });
 
     document.getElementById('summary-cancel').addEventListener('click', () => {
-      modalSummary.classList.add('hidden');
-      modalSummary.classList.remove('flex');
+      closeModal(modalSummary);
     });
 
     document.getElementById('summary-confirm').addEventListener('click', () => {
@@ -395,8 +459,7 @@
 
       modalSummary.classList.add('hidden');
       modalSummary.classList.remove('flex');
-      modalConfirmed.classList.remove('hidden');
-      modalConfirmed.classList.add('flex');
+      openModal(modalConfirmed);
     });
   </script>
 
