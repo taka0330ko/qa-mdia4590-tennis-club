@@ -157,7 +157,7 @@
   </main>
 
   <!-- ===== MODAL: Booking Summary ===== -->
-  <div id="modal-summary" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4">
+  <div id="modal-summary" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4" role="dialog" aria-modal="true" aria-label="Your booking summary">
     <div class="w-full max-w-[520px] rounded-2xl bg-white p-6 sm:p-8">
       <p class="font-display text-center text-lg uppercase text-sp-blue-deep">Your booking summary</p>
 
@@ -209,7 +209,7 @@
   </div>
 
   <!-- ===== MODAL: Booking Confirmed ===== -->
-  <div id="modal-confirmed" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4">
+  <div id="modal-confirmed" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4" role="dialog" aria-modal="true" aria-label="Booking confirmed">
     <div class="w-full max-w-[720px] rounded-[20px] border border-black/10 bg-white p-6 text-center sm:p-10">
       <div class="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-[#e6f6ea]">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#22c55e"/><path d="M7 12.5l3 3 7-7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -338,6 +338,49 @@
       return active ? active.dataset.value : '';
     }
 
+    // accessible modal open/close: moves focus in, traps Tab inside, restores focus on close
+    let lastFocusedBeforeModal = null;
+
+    function getFocusable(container) {
+      return Array.from(container.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'))
+        .filter(el => !el.disabled && el.offsetParent !== null);
+    }
+
+    function openModal(modal) {
+      lastFocusedBeforeModal = document.activeElement;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      const focusable = getFocusable(modal);
+      (focusable[0] || modal).focus();
+    }
+
+    function closeModal(modal) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      if (lastFocusedBeforeModal) lastFocusedBeforeModal.focus();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      const openModalEl = [modalSummary, modalConfirmed].find(m => !m.classList.contains('hidden'));
+      if (!openModalEl) return;
+
+      if (e.key === 'Tab') {
+        const focusable = getFocusable(openModalEl);
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      } else if (e.key === 'Escape' && openModalEl === modalSummary) {
+        closeModal(modalSummary);
+      }
+    });
+
     document.getElementById('booking-form').addEventListener('submit', (e) => {
       e.preventDefault();
       const courtType = getValue('courtType');
@@ -355,13 +398,11 @@
       document.getElementById('summary-players').textContent = players;
       document.getElementById('summary-location').textContent = location;
 
-      modalSummary.classList.remove('hidden');
-      modalSummary.classList.add('flex');
+      openModal(modalSummary);
     });
 
     document.getElementById('summary-cancel').addEventListener('click', () => {
-      modalSummary.classList.add('hidden');
-      modalSummary.classList.remove('flex');
+      closeModal(modalSummary);
     });
 
     document.getElementById('summary-confirm').addEventListener('click', () => {
@@ -374,8 +415,7 @@
 
       modalSummary.classList.add('hidden');
       modalSummary.classList.remove('flex');
-      modalConfirmed.classList.remove('hidden');
-      modalConfirmed.classList.add('flex');
+      openModal(modalConfirmed);
     });
   </script>
 
