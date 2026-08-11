@@ -291,6 +291,9 @@
       const grid = document.getElementById('calendar-grid');
       grid.innerHTML = '';
 
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
       const firstWeekday = new Date(year, month, 1).getDay();
       const daysInMonth = new Date(year, month + 1, 0).getDate();
 
@@ -300,10 +303,14 @@
 
       for (let d = 1; d <= daysInMonth; d++) {
         const isSelected = selectedDate.getFullYear() === year && selectedDate.getMonth() === month && selectedDate.getDate() === d;
-        grid.insertAdjacentHTML('beforeend', `<button type="button" data-day="${d}" class="calendar-day flex h-9 w-9 items-center justify-center rounded-full text-sm uppercase transition ${isSelected ? 'bg-sp-blue-deep text-white font-semibold' : 'hover:bg-black/5'}">${d}</button>`);
+        const isPast = new Date(year, month, d) < today;
+        const classes = isPast
+          ? 'text-sp-muted/40 cursor-not-allowed'
+          : (isSelected ? 'bg-sp-blue-deep text-white font-semibold' : 'hover:bg-black/5');
+        grid.insertAdjacentHTML('beforeend', `<button type="button" data-day="${d}" ${isPast ? 'disabled aria-disabled="true"' : ''} class="calendar-day flex h-9 w-9 items-center justify-center rounded-full text-sm uppercase transition ${classes}">${d}</button>`);
       }
 
-      grid.querySelectorAll('.calendar-day').forEach(btn => {
+      grid.querySelectorAll('.calendar-day:not([disabled])').forEach(btn => {
         btn.addEventListener('click', () => {
           selectedDate = new Date(year, month, parseInt(btn.dataset.day, 10));
           document.getElementById('date-label').textContent = formatDate(selectedDate);
