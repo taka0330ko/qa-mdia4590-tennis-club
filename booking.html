@@ -45,6 +45,9 @@
 
     <h1 class="font-display mt-4 text-3xl uppercase text-sp-ink sm:text-4xl lg:text-5xl">Book your court</h1>
     <p class="mt-3 max-w-md text-base text-sp-muted sm:text-lg">Fill in the details below to reserve your court.</p>
+    <p id="selected-court-note" class="mt-3 hidden items-center gap-2 text-sm font-semibold text-sp-blue-deep sm:text-base">
+      Selected court: <span id="selected-court-name"></span> — <span id="selected-court-location"></span>
+    </p>
 
     <form id="booking-form" class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8">
 
@@ -245,6 +248,26 @@
   </div>
 
   <script>
+    // pre-fill selection carried over from a homepage court card
+    const courtParams = new URLSearchParams(window.location.search);
+    const selectedCourtName = courtParams.get('court');
+    const selectedCourtLocation = courtParams.get('location');
+    const selectedCourtType = courtParams.get('type');
+
+    if (selectedCourtName && selectedCourtLocation) {
+      document.getElementById('selected-court-name').textContent = selectedCourtName;
+      document.getElementById('selected-court-location').textContent = selectedCourtLocation;
+      document.getElementById('selected-court-note').classList.remove('hidden');
+      document.getElementById('selected-court-note').classList.add('flex');
+      document.getElementById('location-label').textContent = selectedCourtLocation;
+    }
+
+    if (selectedCourtType === 'Indoor' || selectedCourtType === 'Outdoor') {
+      document.querySelectorAll('.field-option[data-group="courtType"]').forEach(btn => {
+        btn.setAttribute('aria-pressed', btn.dataset.value === selectedCourtType ? 'true' : 'false');
+      });
+    }
+
     // dropdown fields (location / players / date / time)
     function closeAllDropdowns() {
       document.querySelectorAll('[data-dropdown-panel]').forEach(p => p.classList.add('hidden'));
